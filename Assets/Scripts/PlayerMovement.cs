@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     float horizontalInput;
     float verticalInput;
     //Хотел добавить кратность гравитации
-   // public float landingGravityMultiplier = 35;
+    //public float landingGravityMultiplier = 35;
 
     Vector3 moveDirection;
     public Transform feetPoint;
@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.DrawRay(origin, dir * dist, Color.red);
             Debug.DrawRay(origin + Vector3.up * stepHeight, dir * dist, Color.green);
 
-            if (lower && !upper)
+            if (lower && (!upper || upperHit.distance > dist * 0.8f))
             {
                 rb.MovePosition(rb.position + Vector3.up * stepSmooth * Time.fixedDeltaTime);
                 break;
@@ -104,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        StepClimb();
         MovePlayer();
     }
     private void MyInput()
