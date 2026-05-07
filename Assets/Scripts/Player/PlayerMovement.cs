@@ -128,6 +128,7 @@ public class PlayerMovement : MonoBehaviour
         // Здесь кратность гравитации сокращала бы время падения
         // rb.AddForce(Vector3.down * landingGravityMultiplier);
     }
+    /*
     private void SpeedControl()
     {
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
@@ -138,6 +139,7 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
     }
+    */
     private void Jump()
     {
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);

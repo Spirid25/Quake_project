@@ -28,10 +28,14 @@ public class ShotgunFire : MonoBehaviour
 
             if (Physics.Raycast(cam.transform.position, dir, out RaycastHit hit, range))
             {
-                SpawnFX(hit);
-                SpawnFX(hit);
+                Health hp = hit.collider.GetComponentInParent<Health>();
 
-                Debug.DrawLine(cam.transform.position, hit.point, Color.red, 0.2f);
+                if (hp != null)
+                {
+                    hp.TakeDamage(10f);
+                }
+
+                SpawnFX(hit);
             }
         }
         mouseMovement.AddRecoil();
