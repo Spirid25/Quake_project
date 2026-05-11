@@ -7,6 +7,7 @@ namespace Assets.Scripts
     {
         public GameObject player;
         public Health health;
+        float currHealth;
         void Start()
         {
             health = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
@@ -19,7 +20,7 @@ namespace Assets.Scripts
         }
         void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("Player") && health.CurrentHP < 100)
             {
                 health.Heal(20f);
                 Destroy(gameObject);

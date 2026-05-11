@@ -1,95 +1,48 @@
-﻿using Assets.Scripts;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour
+namespace Assets.Scripts.Enemy
 {
-    enum State { Idle, Chase, Attack }
-
-    float attackTimer;
-    public Health pHealth;
-    public float damage = 10f;
-    public int attackCooldown = 1;
-
-    public float speed = 4f;
-    public float rotationSpeed = 8f;
-    public float aggroDistance = 15f;
-    public float attackDistance = 2f;
-    public float stopDistance = 1f;
-    Transform player;
-    Rigidbody rb;
-
-    State currentState;
-
-    void Start()
+    internal class EnemyAI : MonoBehaviour
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        rb = GetComponent<Rigidbody>();
-        currentState = State.Idle;
-    }
-
-    void Update()
-    {
-        attackTimer -= Time.deltaTime;
-
-        float dist = Vector3.Distance(transform.position, player.position);
-
-        switch (currentState)
-        {
-            case State.Idle:
-                if (dist < aggroDistance)
-                    currentState = State.Chase;
-                break;
-
-            case State.Chase:
-                if (dist < attackDistance)
-                    currentState = State.Attack;
-                else if (dist > aggroDistance)
-                    currentState = State.Idle;
-                break;
-
-            case State.Attack:
-                if (dist > attackDistance)
-                    currentState = State.Chase;
-                break;
+        private enum State {
+            Idle,
+            Chase,
+            Attack
         }
-    }
 
-    void FixedUpdate()
-    {
-        if (player == null) return;
+        public float aggroDistance = 15f;
+        public float attackDistance = 2f;
 
-        Vector3 dir = (player.position - transform.position);
-        dir.y = 0;
+        private Transform eyeTransform;
+        private Transform playerTransform;
+        public EnemyFOV fov;
 
-        // Плавный поворот
-        Quaternion targetRot = Quaternion.LookRotation(dir);
-        transform.rotation = Quaternion.Slerp(
-            transform.rotation,
-            targetRot,
-            rotationSpeed * Time.fixedDeltaTime
-        );
-
-        float dist = Vector3.Distance(transform.position, player.position);
-
-        // Движение только в состоянии Chase
-        if (currentState == State.Chase)
+        private State currentState;
+        /*
+        void Update()
         {
-            if (dist > stopDistance)
+            switch (currentState)
             {
-                rb.MovePosition(
-                    rb.position + transform.forward * speed * Time.fixedDeltaTime
-                );
-            }
-        }
-        if (currentState == State.Attack)
-        {
-            if (attackTimer > 0f) return;
+                case State.Idle:
+                    if (dist < aggroDistance)
+                        currentState = State.Chase;
+                    break;
 
-            attackTimer = attackCooldown;
-            if (pHealth != null)
-            {
-                pHealth.TakeDamage(damage);
+                case State.Chase:
+                    if (dist < attackDistance)
+                        currentState = State.Attack;
+                    else if (dist > aggroDistance)
+                        currentState = State.Idle;
+                    break;
+
+                case State.Attack:
+                    if (dist > attackDistance)
+                        currentState = State.Chase;
+                    break;
             }
-        }
+        }*/
     }
 }
