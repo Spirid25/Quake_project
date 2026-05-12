@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit upperHit;
 
             bool lower = Physics.Raycast(origin, dir, out lowerHit, dist);
-            bool upper = Physics.Raycast(origin + Vector3.up * stepHeight, dir, out upperHit, dist);
+            bool upper = Physics.Raycast(origin + Vector3.up * stepHeight, dir, out upperHit, dist + 1f);
 
             Debug.DrawRay(origin, dir * dist, Color.red);
             Debug.DrawRay(origin + Vector3.up * stepHeight, dir * dist, Color.green);
