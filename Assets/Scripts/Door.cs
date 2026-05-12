@@ -37,6 +37,10 @@ namespace Assets.Scripts
                 }
             canInteract = true;
         }
+        private void OnTriggerExit(Collider other)
+        {
+            canInteract = false;
+        }
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.E) && inventory.hasBlueKey && canInteract && !isMoving)
