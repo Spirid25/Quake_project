@@ -1,23 +1,32 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Weapon;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ShotgunFire : MonoBehaviour
 {
     public GameObject impactFX;
     public ParticleSystem muzzleFlash;
     public Camera cam;
+    public GameObject weapon;
+    public GameObject hands;
     public float range = 100f;
     public float spread = 1f;
     public int pellets = 15;
+    private float nextFireTime = 0f;
+    public float fireRate = 0.6f;
     public MouseMovement mouseMovement;
+    public WeaponRecoil weaponRecoil;
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && Time.time > nextFireTime)
         {
             Shoot();
+            nextFireTime = Time.time + fireRate; 
         }
     }
     void Shoot()
     {
+
         muzzleFlash.Play();
         for (int i = 0; i < pellets; i++)
         {
@@ -32,13 +41,14 @@ public class ShotgunFire : MonoBehaviour
 
                 if (hp != null)
                 {
-                    hp.TakeDamage(15f);
+                    hp.TakeDamage(4f);
                 }
 
                 SpawnFX(hit);
             }
         }
         mouseMovement.AddRecoil();
+        weaponRecoil.AddRecoil();
     }
     void SpawnFX(RaycastHit hit)
     {
@@ -56,7 +66,6 @@ public class ShotgunFire : MonoBehaviour
         {
             ps.Play();
         }
-
         Destroy(fx, 2f);
     }
 }

@@ -41,6 +41,8 @@ namespace Assets.Scripts
         {
             Debug.Log("Loading menu...");
             SceneManager.LoadScene("Menu");
+            Time.timeScale = 1f;
+            isGamePaused = false;
         }
         public void QuitGame()
         {

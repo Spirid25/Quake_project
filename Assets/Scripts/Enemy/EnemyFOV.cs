@@ -3,9 +3,9 @@
 public class EnemyFOV : MonoBehaviour
 {
     [Header("Настройки FOV")]
-    public float viewRadius = 15f;
+    public float viewRadius = 20f;
     [Range(0, 360)]
-    public float viewAngle = 90f;
+    public float viewAngle = 100f;
 
     [Header("Настройки слоев")]
     public LayerMask targetMask;
@@ -66,6 +66,7 @@ public class EnemyFOV : MonoBehaviour
             canSeePlayer = false;
         }
     }
+    /*
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.white;
@@ -92,5 +93,5 @@ public class EnemyFOV : MonoBehaviour
             angleInDegrees += eyeTransform.eulerAngles.y;
         }
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
-    }
+    }  */
 }

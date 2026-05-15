@@ -10,6 +10,22 @@ namespace Assets.Scripts.Enemy
         public float damage = 10f;
         public float cooldown = 1f;
         public float range = 3f;
-        public float attackRate = 1f;
+        public float attackRate = 0.5f;
+        public Transform eyeTransform;
+        public void Attack()
+        {
+            if (Time.time >= cooldown)
+            {
+                cooldown = Time.time + attackRate;
+                if (Physics.Raycast(eyeTransform.position, transform.forward, out RaycastHit hit, range))
+                {
+                    Health hp = hit.collider.GetComponentInParent<Health>();
+                    if (hp != null)
+                    {
+                        hp.TakeDamage(damage);
+                    }
+                }
+            }
+        }
     }
 }

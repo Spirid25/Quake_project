@@ -10,7 +10,7 @@ public class MouseMovement : MonoBehaviour
 
     public Transform orientation;
 
-    public float leanAmount = 2f;
+    public float leanAmount = 2.5f;
     public float leanSpeed = 10f;
 
     float currentLean;
@@ -21,7 +21,7 @@ public class MouseMovement : MonoBehaviour
     public float recoilReturn = 2f;
     float recoilPitch = 0f;
     float recoilReturnSpeed = 12f;
-    public float recoilStrength = 2f;
+    public float recoilStrength = 2.5f;
 
     void Start()
     {

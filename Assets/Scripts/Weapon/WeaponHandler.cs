@@ -14,12 +14,10 @@ public class WeapoonHandler : MonoBehaviour
 
         if (weaponCamera != null)
         {
-            // Настраиваем камеру оружия
             weaponCamera.clearFlags = CameraClearFlags.Depth;
             weaponCamera.cullingMask = weaponLayer;
             weaponCamera.fieldOfView = weaponFOV;
 
-            // Следим за движением основной камеры
             weaponCamera.transform.SetParent(mainCamera.transform);
             weaponCamera.transform.localPosition = Vector3.zero;
             weaponCamera.transform.localRotation = Quaternion.identity;
@@ -30,7 +28,6 @@ public class WeapoonHandler : MonoBehaviour
     {
         if (weaponCamera != null)
         {
-            // Синхронизируем FOV если нужно
             weaponCamera.fieldOfView = weaponFOV;
         }
     }

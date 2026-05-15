@@ -19,8 +19,19 @@ namespace Assets.Scripts.Enemy
         private Transform eyeTransform;
         private Transform playerTransform;
         public EnemyFOV fov;
+        public EnemyMovement move;
+        public EnemyAttack attack;
 
         private State currentState;
+
+        private void Update()
+        {
+            if (fov.canSeePlayer == true)
+            {
+                move.MoveToPlayer();
+                attack.Attack();
+            }
+        }
         /*
         void Update()
         {
