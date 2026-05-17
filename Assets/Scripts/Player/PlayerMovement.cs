@@ -38,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     void StepClimb()
     {
+        if (CompareTag("Slide") == false)
+            return;
         Vector3 origin = feetPoint.position + Vector3.up * 0.1f;
 
         Vector3 forward = orientation.forward;
@@ -45,15 +47,15 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3[] dirs =
         {
-        forward,
-        -forward,
-        right,
-        -right,
-        (forward + right).normalized,
-        (forward - right).normalized,
-        (-forward + right).normalized,
-        (-forward - right).normalized
-    };
+            forward,
+            -forward,
+            right,
+            -right,
+            (forward + right).normalized,
+            (forward - right).normalized,
+            (-forward + right).normalized,
+            (-forward - right).normalized
+        };
 
         for (int i = 0; i < dirs.Length; i++)
         {

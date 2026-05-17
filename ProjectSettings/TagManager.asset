@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - BlueKey
+  - Slide
   layers:
   - Default
   - TransparentFX

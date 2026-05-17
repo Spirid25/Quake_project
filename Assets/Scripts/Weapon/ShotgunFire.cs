@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class ShotgunFire : MonoBehaviour
 {
     public GameObject impactFX;
+    public GameObject bloodFX;
     public ParticleSystem muzzleFlash;
     public Camera cam;
     public GameObject weapon;
@@ -42,9 +43,12 @@ public class ShotgunFire : MonoBehaviour
                 if (hp != null)
                 {
                     hp.TakeDamage(4f);
+                    SpawnBloodFX(hit);
                 }
-
-                SpawnFX(hit);
+                else
+                {
+                    SpawnFX(hit);
+                }
             }
         }
         mouseMovement.AddRecoil();
@@ -56,6 +60,24 @@ public class ShotgunFire : MonoBehaviour
 
         GameObject fx = Instantiate(
             impactFX,
+            hit.point + hit.normal * 0.02f,
+            Quaternion.LookRotation(hit.normal)
+        );
+
+        ParticleSystem ps = fx.GetComponent<ParticleSystem>();
+
+        if (ps != null)
+        {
+            ps.Play();
+        }
+        Destroy(fx, 2f);
+    }
+    void SpawnBloodFX(RaycastHit hit)
+    {
+        if (bloodFX == null) return;
+
+        GameObject fx = Instantiate(
+            bloodFX,
             hit.point + hit.normal * 0.02f,
             Quaternion.LookRotation(hit.normal)
         );
