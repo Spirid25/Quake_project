@@ -13,6 +13,13 @@ namespace Assets.Scripts.Enemy
             Attack
         }
 
+        private enum EnemyType
+        {
+            Melee,
+            Ranged,
+            Flying
+        }
+
         public float aggroDistance = 15f;
         public float attackDistance = 2f;
 
@@ -24,36 +31,42 @@ namespace Assets.Scripts.Enemy
 
         private State currentState;
 
-        private void Update()
-        {
-            if (fov.canSeePlayer == true)
-            {
-                move.MoveToPlayer();
-                attack.Attack();
-            }
-        }
-        /*
         void Update()
         {
             switch (currentState)
             {
                 case State.Idle:
-                    if (dist < aggroDistance)
+                    if (fov.canSeePlayer == true)
+                    {
+                        move.MoveToPlayer();
+                        attack.Attack();
                         currentState = State.Chase;
+                    }
                     break;
-
                 case State.Chase:
-                    if (dist < attackDistance)
+                    if (fov.canSeePlayer == true)
+                    {
+                        move.MoveToPlayer();
+                        attack.Attack();
+                        currentState = State.Chase;
+                    }
+                    /*if (dist < attackDistance)
                         currentState = State.Attack;
                     else if (dist > aggroDistance)
-                        currentState = State.Idle;
+                        currentState = State.Idle;*/
                     break;
 
                 case State.Attack:
-                    if (dist > attackDistance)
+                    if (fov.canSeePlayer == true)
+                    {
+                        move.MoveToPlayer();
+                        attack.Attack();
                         currentState = State.Chase;
+                    }
+                    /*if (dist > attackDistance)
+                        currentState = State.Chase;*/
                     break;
             }
-        }*/
+        }
     }
 }
