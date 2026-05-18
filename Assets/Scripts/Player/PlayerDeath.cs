@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 
 public class PlayerDeath : MonoBehaviour
 {
     public GameObject deathUI;
     Health health;
     bool alreadyDied = false;
+    public AudioSource audioSource;
+    public AudioClip DeathSound;
     void Start()
     {
         health = GetComponent<Health>();
@@ -25,6 +28,7 @@ public class PlayerDeath : MonoBehaviour
         if (alreadyDied) return;
         alreadyDied = true;
         Debug.Log("PLAYER DIE");
+        audioSource.PlayOneShot(DeathSound);
         deathUI.SetActive(true);
 
         Time.timeScale = 0f;

@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Weapon;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 
 public class ShotgunFire : MonoBehaviour
@@ -17,6 +18,8 @@ public class ShotgunFire : MonoBehaviour
     public float fireRate = 0.6f;
     public MouseMovement mouseMovement;
     public WeaponRecoil weaponRecoil;
+    public AudioSource audioSource;
+    public AudioClip shotClip;
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && Time.time > nextFireTime)
@@ -27,8 +30,9 @@ public class ShotgunFire : MonoBehaviour
     }
     void Shoot()
     {
-
         muzzleFlash.Play();
+        audioSource.PlayOneShot(shotClip);
+
         for (int i = 0; i < pellets; i++)
         {
             Vector3 dir = cam.transform.forward;

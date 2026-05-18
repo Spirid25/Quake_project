@@ -11,6 +11,7 @@ namespace Assets.Scripts
         public Inventory inventory;
         private void OnTriggerEnter(Collider other)
         {
+            GetComponent<AudioSource>().PlayOneShot(GetComponent<AudioClip>());
             inventory.hasBlueKey = true;
             Destroy(gameObject);
             Debug.Log("You have picked up the blue key!");

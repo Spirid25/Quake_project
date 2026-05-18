@@ -22,8 +22,9 @@ namespace Assets.Scripts
         {
             if (other.CompareTag("Player") && health.CurrentHP < 100)
             {
+                GetComponent<AudioSource>().Play();
                 health.Heal(20f);
-                Destroy(gameObject);
+                Destroy(gameObject, 0.4f);
             }
         }
     }

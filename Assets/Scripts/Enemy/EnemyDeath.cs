@@ -9,6 +9,7 @@ public class EnemyDeath : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        GetComponent<AudioSource>().Play();
+        Destroy(gameObject, 0.4f);
     }
 }

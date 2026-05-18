@@ -30,6 +30,11 @@ public class PlayerMovement : MonoBehaviour
 
     float horizontalInput;
     float verticalInput;
+
+    public AudioSource footstepAudio;
+    public float stepCooldown = 0.4f;
+
+    private float stepTimer;
     //Хотел добавить кратность гравитации
     //public float landingGravityMultiplier = 35;
 
@@ -99,6 +104,19 @@ public class PlayerMovement : MonoBehaviour
         //Делаем трассировку луча видимой
         //Debug.DrawRay(transform.position, Vector3.down * (playerHeight * 0.5f + 0.2f), Color.red);
         MyInput();
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+
+        if (grounded && flatVel.magnitude > 1f)
+        {
+            stepTimer -= Time.deltaTime;
+
+            if (stepTimer <= 0f)
+            {
+                footstepAudio.Play();
+
+                stepTimer = stepCooldown;
+            }
+        }
         if (grounded)
             rb.linearDamping = groundDrag;
         else
